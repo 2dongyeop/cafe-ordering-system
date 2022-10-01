@@ -1,3 +1,5 @@
+package UserInterface;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,7 +7,7 @@ import java.io.InputStreamReader;
 public class UserDisplay {
     BufferedReader br;
 
-    UserDisplay() throws Exception {
+    public UserDisplay() throws Exception {
         br = new BufferedReader(new InputStreamReader(System.in));
 
         try {
