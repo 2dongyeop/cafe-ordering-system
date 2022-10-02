@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class UserDisplay {
     BufferedReader br;
 
-    public UserDisplay() throws Exception {
+    public UserDisplay(){
         br = new BufferedReader(new InputStreamReader(System.in));
 
         try {
@@ -37,6 +37,10 @@ public class UserDisplay {
         System.out.println("1. 아메리카노 | 2. 카페라떼 | 3. 레몬차 | 4. 아인슈페너");
 
         int drinkSelect = br.read();
+
+        /**
+         * 팩토리 패턴을 이용한 음료 객체 생성 코드 작성할 곳
+         */
 
 
     }
