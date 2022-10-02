@@ -2,7 +2,7 @@ package drinkList;
 
 public class Latte extends Drink {
     public Latte() {
-        description = "달~달한 카페라떼";
+        description = "달~달한 라떼";
     }
 
     @Override
