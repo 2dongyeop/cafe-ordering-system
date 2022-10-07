@@ -13,7 +13,6 @@ public class MainUI {
 
     public MainUI() {
         br = new BufferedReader(new InputStreamReader(System.in));
-        userAuthProcess = new AuthProcess();
 
         try {
             welcomeUI();
@@ -24,6 +23,8 @@ public class MainUI {
 
     private final void welcomeUI() throws Exception {
         do {
+            userAuthProcess = new AuthProcess();
+
             System.out.println("=====카페 주문 시스템이 시작됩니다.=====");
             System.out.println("1. 음료 주문 | 2. 이달의 추천 메뉴 보기 | 3. 종료");
 
