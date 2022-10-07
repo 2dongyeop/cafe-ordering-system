@@ -1,17 +1,17 @@
 package userInterface;
 
-import userAuthentication.AuthProcess;
+import userInterface.userAuthentication.AuthProcess;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class UserDisplay {
+public class MainUI {
     AuthProcess userAuthProcess;
     BufferedReader br;
     boolean isExited = false;
 
-    public UserDisplay() {
+    public MainUI() {
         br = new BufferedReader(new InputStreamReader(System.in));
         userAuthProcess = new AuthProcess();
 
