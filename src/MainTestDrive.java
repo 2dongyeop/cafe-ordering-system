@@ -6,9 +6,7 @@ public class MainTestDrive {
     private static AuthProcess authProcess;
 
     public static void main(String[] args) throws Exception {
-        UI = new MainUI();
         authProcess = new AuthProcess();
-
-
+        UI = new MainUI();
     }
 }
