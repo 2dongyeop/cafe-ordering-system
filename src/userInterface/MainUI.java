@@ -1,5 +1,6 @@
 package userInterface;
 
+import drinkFactory.DrinkFactory;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
 import userInterface.userAuthentication.AuthProcess;
@@ -9,11 +10,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MainUI {
+    DrinkFactory drinkFactory;
     AuthProcess userAuthProcess;
     BufferedReader br;
     boolean isExited = false;
 
     public MainUI() {
+        drinkFactory = new DrinkFactory();
         br = new BufferedReader(new InputStreamReader(System.in));
 
         try {
@@ -34,7 +37,7 @@ public class MainUI {
 
             switch (menuSelect) {
                 case 1:
-                    orderDrink();
+                    orderProcess();
                     break;
                 case 2:
                     showRecommendedMenu();
@@ -48,16 +51,31 @@ public class MainUI {
         } while (!isExited);
     }
 
-    private final void orderDrink() throws IOException {
+    private final void orderProcess() throws IOException {
+        /**
+         * 템플릿 메소드 패턴 적용
+         */
+        selectDrink();
+        selectCupSize();
+        selectOptions();
+    }
+
+    private final void selectDrink() throws IOException {
         System.out.println("=====음료 주문이 시작됩니다.=====");
         System.out.println("1. 아메리카노 | 2. 카페라떼 | 3. 레몬차 | 4. 아인슈페너");
 
-        int drinkSelect = br.read();
-
+        int drinkSelect = Integer.parseInt(br.readLine());
         /**
-         * 팩토리 패턴을 이용한 음료 객체 생성 코드 작성할 곳
+         * 팩토리 메소드 패턴을 이용한 음료 생성
          */
+        drinkFactory.createDrink(drinkSelect);
+    }
 
+    private final void selectCupSize() {
+
+    }
+
+    private final void selectOptions() {
 
     }
 
