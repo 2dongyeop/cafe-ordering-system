@@ -1,5 +1,7 @@
 package userInterface;
 
+import userInterface.userAuthentication.ApplicationException.InvalidInputException;
+import userInterface.userAuthentication.ApplicationException.SameIdException;
 import userInterface.userAuthentication.AuthProcess;
 
 import java.io.BufferedReader;
@@ -21,14 +23,14 @@ public class MainUI {
         }
     }
 
-    private final void welcomeUI() throws Exception {
-        do {
-            userAuthProcess = new AuthProcess();
+    private final void welcomeUI() throws IOException, InvalidInputException, SameIdException {
+        userAuthProcess = new AuthProcess();
 
+        do {
             System.out.println("=====카페 주문 시스템이 시작됩니다.=====");
             System.out.println("1. 음료 주문 | 2. 이달의 추천 메뉴 보기 | 3. 종료");
 
-            int menuSelect = br.read();
+            int menuSelect = Integer.parseInt(br.readLine());
 
             switch (menuSelect) {
                 case 1:
@@ -38,10 +40,10 @@ public class MainUI {
                     showRecommendedMenu();
                     break;
                 case 3:
-
+                    isExited = true;
                     break;
                 default:
-                    throw new Exception("선택지는 1 또는 2또는 3만 존재합니다.");
+                    throw new InvalidInputException("선택지는 1 또는 2또는 3만 존재합니다.");
             }
         } while (!isExited);
     }
