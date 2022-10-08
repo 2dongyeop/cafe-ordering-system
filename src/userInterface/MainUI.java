@@ -58,6 +58,7 @@ public class MainUI {
         selectDrink();
         selectCupSize();
         selectOptions();
+        selectPayment();
     }
 
     private final void selectDrink() throws IOException {
@@ -76,6 +77,10 @@ public class MainUI {
     }
 
     private final void selectOptions() {
+
+    }
+
+    private final void selectPayment() {
 
     }
 
