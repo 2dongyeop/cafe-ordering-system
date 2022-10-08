@@ -1,4 +1,4 @@
-package userInterface.userAuthentication.ApplicationException;
+package userInterface.ApplicationException;
 
 public class SameIdException extends Exception {
     public SameIdException() {}
