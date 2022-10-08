@@ -13,3 +13,9 @@
 
 <br/>
 
+### 진행 상황
+#### 💡 22/10/8
+- 카페 주문 시스템의 기본 로직을 설계합니다.
+- 메뉴를 주문하기 전, [인증 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/userInterface/userAuthentication/AuthProcess.java)을 추가하였습니다.
+  - 현재 로그인을 이용한 회원 주문을 구현하였고, 비회원 주문도 구현할 예정입니다.
+  - 로그인 과정 중 발생하는 예외는 [사용자 예외](https://github.com/2dongyeop/cafe-ordering-system/tree/main/src/userInterface/userAuthentication/ApplicationException)를 만들어 사용합니다.
