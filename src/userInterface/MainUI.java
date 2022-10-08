@@ -1,7 +1,7 @@
 package userInterface;
 
-import userInterface.ApplicationException.InvalidInputException;
-import userInterface.ApplicationException.SameIdException;
+import userInterface.applicationException.InvalidInputException;
+import userInterface.applicationException.SameIdException;
 import userInterface.userAuthentication.AuthProcess;
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package userInterface.ApplicationException;
+package userInterface.applicationException;
 
 public class InvalidInputException extends Exception {
     public InvalidInputException() {}
