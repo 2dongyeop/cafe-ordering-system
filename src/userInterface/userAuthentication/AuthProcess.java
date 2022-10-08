@@ -10,7 +10,7 @@ import java.util.*;
 
 public class AuthProcess {
     private static Set<User> userDB;
-    BufferedReader br;
+    private BufferedReader br;
 
     public AuthProcess() throws IOException, InvalidInputException, SameIdException {
         userDB = new HashSet<>();
@@ -33,7 +33,7 @@ public class AuthProcess {
         }
     }
 
-    public void memberOrder() throws InvalidInputException, IOException, SameIdException {
+    public final void memberOrder() throws InvalidInputException, IOException, SameIdException {
         boolean logInSuccess = false;
 
         do {
@@ -55,11 +55,11 @@ public class AuthProcess {
         } while (!logInSuccess);
     }
 
-    public void nonMemberOrder() {
-
+    public final void nonMemberOrder() {
+        System.out.println("비회원 주문을 선택하셨습니다.");
     }
 
-    public void signUp() throws IOException, SameIdException {
+    public final void signUp() throws IOException, SameIdException {
         System.out.println("=====회원가입 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");
@@ -76,7 +76,7 @@ public class AuthProcess {
         }
     }
 
-    public boolean hasSameICheck(final String id) {
+    public final boolean hasSameICheck(final String id) {
         /**
          * iterator 반복자를 이용한 id 중복 체크
          */
@@ -90,7 +90,7 @@ public class AuthProcess {
         return false;
     }
 
-    public boolean logIn() throws IOException {
+    public final boolean logIn() throws IOException {
         System.out.println("=====로그인 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");
