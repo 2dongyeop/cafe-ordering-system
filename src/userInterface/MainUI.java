@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainUI {
@@ -53,7 +54,7 @@ public class MainUI {
                 switch (menuSelect) {
                     case 1:
                         orderProcess();
-                        printOrderDetails(drink);
+                        printOrderDetails((ArrayList<Drink>) orderList);
                         break;
                     case 2:
                         showRecommendedMenu();
@@ -151,13 +152,13 @@ public class MainUI {
         }
     }
 
-    private final void printOrderDetails(Drink drink) {
-//        ArrayList<Drink> orderList
-//        for (Drink d : orderList) {
-//            System.out.println(d.getDescription() + " $" + d.cost() + ", " + d.getSize());
-//        }
+    private final void printOrderDetails(ArrayList<Drink> orderList) {
+        Iterator<Drink> iterator = orderList.iterator();
 
-        System.out.println(drink.getDescription()+ " $" + drink.cost() + ", " + drink.getSize());
+        while (iterator.hasNext()) {
+            Drink d = iterator.next();
+            System.out.println(d.getDescription() + " $" + d.cost() + ", " + d.getSize());
+        }
     }
 
     private final void showRecommendedMenu() {
