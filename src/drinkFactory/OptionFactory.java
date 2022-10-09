@@ -17,6 +17,9 @@ public class OptionFactory {
             return new Syrup(drink);
         } else if (type == 4) {
             return new NoCommand(drink);
+            /**
+             * NoCommand는 Null object로, 아무 동작을 하지 않음
+             */
         }
         else {
             throw new InvalidInputException("선택지는 1부터 4까지만 가능합니다.");
