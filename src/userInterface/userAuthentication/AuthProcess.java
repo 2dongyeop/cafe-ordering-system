@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class AuthProcess {
-    boolean logInSuccess = false;
+    private boolean logInSuccess = false;
     private static Set<User> userDB;
     private BufferedReader br;
 
@@ -38,7 +38,7 @@ public class AuthProcess {
         }
     }
 
-    public final void memberOrder() throws InvalidInputException, IOException, SameIdException {
+    private final void memberOrder() throws InvalidInputException, IOException, SameIdException {
 
         do {
             System.out.println("=====회원 주문 페이지로 이동하기 전, 인증이 필요합니다.=====");
@@ -63,11 +63,11 @@ public class AuthProcess {
         } while (!logInSuccess);
     }
 
-    public final void nonMemberOrder() {
+    private final void nonMemberOrder() {
         System.out.println("비회원 주문을 선택하셨습니다.");
     }
 
-    public final void signUp() throws IOException, SameIdException {
+    private final void signUp() throws IOException, SameIdException {
         System.out.println("=====회원가입 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");
@@ -85,7 +85,7 @@ public class AuthProcess {
         }
     }
 
-    public final boolean hasSameICheck(final String id) {
+    private final boolean hasSameICheck(final String id) {
         /**
          * iterator 반복자를 이용한 id 중복 체크
          */
@@ -99,7 +99,7 @@ public class AuthProcess {
         return false;
     }
 
-    public final boolean logIn() throws IOException {
+    private final boolean logIn() throws IOException {
         System.out.println("=====로그인 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");
