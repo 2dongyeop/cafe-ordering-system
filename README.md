@@ -6,6 +6,7 @@
     - 반복자 패턴
     - 데코레이터 패턴
     - 템플릿 메소드 패턴
+    - Null Object 패턴
 
 <br/>
 
@@ -14,7 +15,14 @@
 <br/>
 
 ### 진행 상황
-#### 💡 22/10/8
+#### 💡 22/10/09
+- `NoCommand` 클래스를 만들어 `Null Object 패턴`을 적용하여, 안정성을 높입니다.
+- 음료의 옵션과 사이즈에 대한 데코레이터 및 팩토리를 구현하였습니다.
+- 
+
+<br/>
+
+#### 💡 22/10/08
 - 카페 주문 시스템의 기본 로직을 설계합니다.
 - 메뉴를 주문하기 전, [인증 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/userInterface/userAuthentication/AuthProcess.java)을 추가하였습니다.
   - 현재 로그인을 이용한 회원 주문과 비회원 주문을 구현하였습니다.

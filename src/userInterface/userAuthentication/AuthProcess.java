@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class AuthProcess {
+    boolean logInSuccess = false;
     private static Set<User> userDB;
     private BufferedReader br;
 
@@ -19,38 +20,45 @@ public class AuthProcess {
         System.out.println("=====어서오세요. 22세기 빽다방에 오신걸 환영합니다^^.=====");
         System.out.println("=====1. 회원으로 주문하기 | 2. 비회원으로 주문하기");
 
-        int inputOrderMethod = Integer.parseInt(br.readLine());
+        try {
+            int inputOrderMethod = Integer.parseInt(br.readLine());
 
-        switch (inputOrderMethod) {
-            case 1:
-                memberOrder();
-                break;
-            case 2:
-                nonMemberOrder();
-                break;
-            default:
-                throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
+            switch (inputOrderMethod) {
+                case 1:
+                    memberOrder();
+                    break;
+                case 2:
+                    nonMemberOrder();
+                    break;
+                default:
+                    throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
+            }
+        } catch (ClassCastException e) {
+            System.out.println("입력은 정수만 가능합니다.");
         }
     }
 
     public final void memberOrder() throws InvalidInputException, IOException, SameIdException {
-        boolean logInSuccess = false;
 
         do {
             System.out.println("=====회원 주문 페이지로 이동하기 전, 인증이 필요합니다.=====");
             System.out.println("1. 회원가입 | 2. 로그인");
 
-            int inputAuthMethod = Integer.parseInt(br.readLine());
+            try {
+                int inputAuthMethod = Integer.parseInt(br.readLine());
 
-            switch (inputAuthMethod) {
-                case 1:
-                    signUp();
-                    break;
-                case 2:
-                    logInSuccess = logIn();
-                    break;
-                default:
-                    throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
+                switch (inputAuthMethod) {
+                    case 1:
+                        signUp();
+                        break;
+                    case 2:
+                        logInSuccess = logIn();
+                        break;
+                    default:
+                        throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
+                }
+            } catch (ClassCastException e) {
+                System.out.println("입력은 정수만 가능합니다.");
             }
         } while (!logInSuccess);
     }
@@ -72,7 +80,8 @@ public class AuthProcess {
             userDB.add(new User(signUpId, signUpPassword));
             System.out.println("회원가입 성공!");
         } else {
-            throw new SameIdException("Id 중복 : 동일한 id가 있습니다.");
+            System.out.println("Id 중복 : 동일한 id가 있습니다.");
+            return;
         }
     }
 
