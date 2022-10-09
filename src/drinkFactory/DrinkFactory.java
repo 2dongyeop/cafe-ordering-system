@@ -4,7 +4,7 @@ import drinkList.*;
 import userInterface.applicationException.InvalidInputException;
 
 public class DrinkFactory {
-    public Drink createDrink(int type) throws InvalidInputException {
+    public final Drink createDrink(final int type) throws InvalidInputException {
         Drink drink;
 
         if (type == 1) {
