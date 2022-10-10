@@ -14,6 +14,30 @@
 
 <br/>
 
+### 트랜잭션 과정 및 클래스 다이어그램
+<details>
+<summary> 이미지 보기 </summary>
+<div markdown="1">       
+
+- 트랜잭션 과정
+
+<br/>
+
+<br/>
+
+- 클래스 다이어그램
+
+<img src="https://github.com/2dongyeop/cafe-ordering-system/blob/main/image/class-diagram.png" width = 500/>
+
+
+</div>
+</details>
+
+
+<br/>
+
+<br/>
+
 ### 진행 상황
 #### 💡 22/10/09
 - `NoCommand` 클래스를 만들어 `Null Object 패턴`을 적용하여, 안정성을 높였습니다.
