@@ -76,7 +76,7 @@ public class AuthProcess {
         System.out.print("password를 입력하세요 > ");
         String signUpPassword = br.readLine();
 
-        if (!hasSameICheck(signUpId)) {
+        if (!hasSameIdCheck(signUpId)) {
             userDB.add(new User(signUpId, signUpPassword));
             System.out.println("회원가입 성공!");
         } else {
@@ -85,7 +85,7 @@ public class AuthProcess {
         }
     }
 
-    private final boolean hasSameICheck(final String id) {
+    private final boolean hasSameIdCheck(final String id) {
         /**
          * iterator 반복자를 이용한 id 중복 체크
          */
