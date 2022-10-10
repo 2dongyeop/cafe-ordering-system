@@ -10,7 +10,7 @@
 
 <br/>
 
-> 여러 디자인 패턴을 공부하며 정리한 자료는 [링크](https://github.com/2dongyeop/design-pattern)를 통해 확인 수 있습니다.
+> 여러 디자인 패턴을 공부하며 정리한 자료는 [링크](https://github.com/2dongyeop/design-pattern)를 통해 확인하실 수 있습니다.
 
 <br/>
 
