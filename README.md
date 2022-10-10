@@ -14,6 +14,8 @@
 
 <br/>
 
+<br/>
+
 ### 트랜잭션 과정 및 클래스 다이어그램
 <details>
 <summary> 이미지 보기 </summary>
@@ -41,6 +43,11 @@
 <br/>
 
 ### 진행 상황
+#### 💡 22/10/10 
+- 트랜잭션 및 클래스 다이어그램을 그려 첨부하였습니다.
+
+<br/>
+
 #### 💡 22/10/09
 - `NoCommand` 클래스를 만들어 `Null Object 패턴`을 적용하여, 안정성을 높였습니다.
 - 코드를 객체지향에 맞게 수정하기 위해 [메뉴 선택 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/userInterface/orderProcess/OrderProcess.java)을 MainUI로부터 분리하였습니다.
