@@ -22,6 +22,4 @@ public class RecommnedProcess {
     public Drink getRecommendedDrink() {
         return recommendedDrink;
     }
-
-
 }
