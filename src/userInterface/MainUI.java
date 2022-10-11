@@ -7,6 +7,7 @@ import drinkList.Drink;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
 import userInterface.orderProcess.OrderProcess;
+import userInterface.recommendProcess.RecommnedProcess;
 import userInterface.userAuthentication.AuthProcess;
 
 import java.io.BufferedReader;
@@ -19,10 +20,12 @@ import java.util.List;
 public class MainUI {
     Drink drink;
     BufferedReader br;
+    Drink recommendDrink;
     List<Drink> orderList;
     SizeFactory sizeFactory;
     DrinkFactory drinkFactory;
     OptionFactory optionFactory;
+    RecommnedProcess recommnedProcess;
     AuthProcess userAuthProcess;
     OrderProcess orderProcess;
     boolean isExited = false;
@@ -116,12 +119,11 @@ public class MainUI {
         }
     }
 
-    private final void showRecommendedMenu() {
-        /**
-         * 추천 메뉴를 보여줍니다.
-         * 추천 메뉴 선택 방식은 아래와 같이 고민해봐야 합니다.
-         * 1. 랜덤하게 메뉴를 고르기
-         * 2. 누적판매량을 기반으로 고르기
-         */
+    private final void showRecommendedMenu() throws InvalidInputException {
+        recommnedProcess = new RecommnedProcess();
+
+        recommendDrink = recommnedProcess.getRecommendedDrink();
+
+        System.out.println("오늘의 추천 메뉴는 : " + recommendDrink.getDescription());
     }
 }
