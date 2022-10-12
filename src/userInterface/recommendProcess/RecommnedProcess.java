@@ -11,7 +11,7 @@ public class RecommnedProcess {
     Drink recommendedDrink;
     DrinkFactory drinkFactory;
 
-    public RecommnedProcess() throws InvalidInputException {
+    public RecommnedProcess() throws InvalidInputExceptioan {
         drinkFactory = new DrinkFactory();
         Random random = new Random();
 
