@@ -7,7 +7,7 @@ import drinkList.Drink;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
 import userInterface.orderProcess.OrderProcess;
-import userInterface.recommendProcess.RecommnedProcess;
+import userInterface.recommendProcess.RecommendProcess;
 import userInterface.userAuthentication.AuthProcess;
 
 import java.io.BufferedReader;
@@ -25,13 +25,13 @@ public class MainUI {
     SizeFactory sizeFactory;
     DrinkFactory drinkFactory;
     OptionFactory optionFactory;
-    RecommnedProcess recommnedProcess;
+    RecommendProcess recommnedProcess;
     AuthProcess userAuthProcess;
     OrderProcess orderProcess;
     boolean isExited = false;
 
     public MainUI() {
-        orderList = new ArrayList<>();
+        orderList = new ArrayList<Drink>();
         sizeFactory = new SizeFactory();
         drinkFactory = new DrinkFactory();
         optionFactory = new OptionFactory();
@@ -55,23 +55,16 @@ public class MainUI {
 
 
             try {
-                int menuSelect = Integer.parseInt(br.readLine());
+                int menuSelect = Integer.parseInt(br.readLine());  //enum으로 수정해보기.
 
                 switch (menuSelect) {
-                    case 1:
-                        orderProcess();
-
-                        printOrderDetails((ArrayList<Drink>) orderList);
-                        break;
-                    case 2:
-                        showRecommendedMenu();
-                        break;
-                    case 3:
-                        isExited = true;
+                    case 1 -> {orderProcess(); printOrderDetails(orderList);}
+                    case 2 -> showRecommendedMenu();
+                    case 3 -> {
                         System.out.println("프로그램을 종료합니다.");
-                        break;
-                    default:
-                        throw new InvalidInputException("선택지는 1 또는 2또는 3만 존재합니다.");
+                        isExited = true;
+                    }
+                    default -> throw new InvalidInputException("선택지는 1부터 3까지만 가능합니다.");
                 }
             } catch (ClassCastException e) {
                 System.out.println("입력은 정수만 가능합니다.");
@@ -94,23 +87,20 @@ public class MainUI {
         try {
             int addOrderSelect = Integer.parseInt(br.readLine());
 
-            if (addOrderSelect == 1) {
-                drink = orderProcess.getDrink();
-                orderList.add(drink);
-
-            } else if (addOrderSelect == 2) {
-                drink = orderProcess.getDrink();
-                orderList.add(drink);
-                isExited = true;
-            } else {
-                throw new InvalidInputException();
+            switch (addOrderSelect) {
+                case 1 -> {drink = orderProcess.getDrink();
+                    orderList.add(drink);}
+                case 2-> {drink = orderProcess.getDrink();
+                    orderList.add(drink);
+                    isExited = true;}
+                default -> throw new InvalidInputException();
             }
         } catch (ClassCastException | InvalidInputException e) {
             System.out.println("입력은 1과 2만 가능합니다.");
         }
     }
 
-    private final void printOrderDetails(ArrayList<Drink> orderList) {
+    private final void printOrderDetails(List orderList) {
         Iterator<Drink> iterator = orderList.iterator();
 
         while (iterator.hasNext()) {
@@ -120,7 +110,7 @@ public class MainUI {
     }
 
     private final void showRecommendedMenu() throws InvalidInputException {
-        recommnedProcess = new RecommnedProcess();
+        recommnedProcess = new RecommendProcess();
 
         recommendDrink = recommnedProcess.getRecommendedDrink();
 
