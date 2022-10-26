@@ -1,6 +1,6 @@
 package drinkFactory;
 
-import drinkList.Drink;
+import drinkList.*;
 import drinkList.extra.Ice;
 import drinkList.extra.NoCommand;
 import drinkList.extra.Shot;
@@ -9,20 +9,21 @@ import userInterface.applicationException.InvalidInputException;
 
 public class OptionFactory {
     public Drink selectOption(int type, Drink drink) throws InvalidInputException {
-        if (type == 1) {
-            return new Ice(drink);
-        } else if (type == 2) {
-            return new Shot(drink);
-        } else if (type == 3) {
-            return new Syrup(drink);
-        } else if (type == 4) {
-            return new NoCommand(drink);
-            /**
-             * NoCommand는 Null object로, 아무 동작을 하지 않음
-             */
-        }
-        else {
-            throw new InvalidInputException("선택지는 1부터 4까지만 가능합니다.");
-        }
+        drink = switch (type) {
+            case 1 -> {
+                yield new Ice(drink);
+            }
+            case 2 -> {
+                yield new Shot(drink);
+            }
+            case 3 -> {
+                yield new Syrup(drink);
+            }
+            case 4 -> {
+                yield new NoCommand(drink);
+            }
+            default -> throw new InvalidInputException("1부터 4까지만 입력 가능합니다.");
+        };
+        return drink;
     }
 }

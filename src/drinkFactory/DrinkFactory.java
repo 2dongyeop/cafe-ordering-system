@@ -5,20 +5,21 @@ import userInterface.applicationException.InvalidInputException;
 
 public class DrinkFactory {
     public final Drink createDrink(final int type) throws InvalidInputException {
-        Drink drink;
-
-        if (type == 1) {
-            drink = new Americano();
-        } else if (type == 2) {
-            drink = new Latte();
-        } else if (type == 3) {
-            drink = new LemonTee();
-        } else if (type == 4) {
-            drink = new Einspanner();
-        } else {
-            throw new InvalidInputException("입력은 1부터 4까지의 정수만 가능합니다");
-        }
-
+        Drink drink = switch (type) {
+            case 1 -> {
+                yield new Americano();
+            }
+            case 2 -> {
+                yield new Latte();
+            }
+            case 3 -> {
+                yield new LemonTee();
+            }
+            case 4 -> {
+                yield new Einspanner();
+            }
+            default -> throw new InvalidInputException("1부터 4까지만 입력 가능합니다.");
+        };
         return drink;
     }
 }

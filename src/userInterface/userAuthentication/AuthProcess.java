@@ -8,19 +8,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-enum OrderSelect {
-    MEMBERORDER(1),
-    NONMEMBERSELECT(2);
-
-    private int selectNum;
-
-    OrderSelect(int n) {
-        this.selectNum = n;
-    }
-
-    int getSelectNum() {
-        return selectNum;
-    }
+enum AuthSelect {
+    MEMBERORDER,
+    NONMEMBERSELECT,
+    SIGNUP,
+    LOGIN;
 }
 
 public class AuthProcess {
@@ -37,16 +29,27 @@ public class AuthProcess {
 
 
         try {
-            int inputOrderMethod = Integer.parseInt(br.readLine());
-            
-            switch (inputOrderMethod) {
-                case 1 -> memberOrder();
-                case 2 -> nonMemberOrder();
+            switch (transformAuthProcess(br.readLine())) {
+                case MEMBERORDER -> memberOrder();
+                case NONMEMBERSELECT -> nonMemberOrder();
                 default -> throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
             }
         } catch (ClassCastException e) {
             System.out.println("입력은 정수만 가능합니다.");
         }
+    }
+
+    private AuthSelect transformAuthProcess(final String s) throws InvalidInputException {
+        AuthSelect authSelect = switch (s) {
+            case "1" -> {
+                yield  AuthSelect.MEMBERORDER;
+            }
+            case "2" -> {
+                yield AuthSelect.NONMEMBERSELECT;
+            }
+            default -> throw new InvalidInputException("1또는 2만 입력 가능합니다.");
+        };
+        return authSelect;
     }
 
     private final void memberOrder() throws InvalidInputException, IOException, SameIdException {
@@ -56,17 +59,29 @@ public class AuthProcess {
             System.out.println("1. 회원가입 | 2. 로그인");
 
             try {
-                int inputAuthMethod = Integer.parseInt(br.readLine());
-
-                switch (inputAuthMethod) {
-                    case 1 -> signUp();
-                    case 2 -> logInSuccess = logIn();
+                switch (transformAuthMethod(br.readLine())) {
+                    case SIGNUP -> signUp();
+                    case LOGIN -> logInSuccess = logIn();
                     default -> throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
                 }
             } catch (ClassCastException e) {
                 System.out.println("입력은 정수만 가능합니다.");
             }
         } while (!logInSuccess);
+    }
+
+
+    private AuthSelect transformAuthMethod(final String s) throws InvalidInputException {
+        AuthSelect authSelect = switch (s) {
+            case "1" -> {
+                yield  AuthSelect.SIGNUP;
+            }
+            case "2" -> {
+                yield AuthSelect.LOGIN;
+            }
+            default -> throw new InvalidInputException("1또는 2만 입력 가능합니다.");
+        };
+        return authSelect;
     }
 
     private final void nonMemberOrder() {
