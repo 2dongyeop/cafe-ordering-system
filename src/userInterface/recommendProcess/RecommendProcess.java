@@ -7,11 +7,11 @@ import userInterface.applicationException.InvalidInputException;
 import java.util.Random;
 
 
-public class RecommnedProcess {
+public class RecommendProcess {
     Drink recommendedDrink;
     DrinkFactory drinkFactory;
 
-    public RecommnedProcess() throws InvalidInputExceptioan {
+    public RecommendProcess() throws InvalidInputException {
         drinkFactory = new DrinkFactory();
         Random random = new Random();
 
