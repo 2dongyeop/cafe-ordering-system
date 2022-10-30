@@ -10,9 +10,7 @@ import userInterface.orderProcess.OrderProcess;
 import userInterface.recommendProcess.RecommendProcess;
 import userInterface.userAuthentication.AuthProcess;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +25,7 @@ enum CafeSelect {
 
 public class MainUI {
     Drink drink;
-    BufferedReader br;
+    SingletonBufferedReader br;
     Drink recommendDrink;
     List<Drink> orderList;
     SizeFactory sizeFactory;
@@ -45,7 +43,7 @@ public class MainUI {
         optionFactory = new OptionFactory();
         orderProcess = new OrderProcess();
         userAuthProcess = new AuthProcess();
-        br = new BufferedReader(new InputStreamReader(System.in));
+        br = SingletonBufferedReader.getInstance();
 
         try {
             welcomeUI();

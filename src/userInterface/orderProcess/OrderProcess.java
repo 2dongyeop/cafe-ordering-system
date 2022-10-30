@@ -4,6 +4,7 @@ import drinkFactory.DrinkFactory;
 import drinkFactory.OptionFactory;
 import drinkFactory.SizeFactory;
 import drinkList.Drink;
+import userInterface.SingletonBufferedReader;
 import userInterface.applicationException.InvalidInputException;
 
 import java.io.BufferedReader;
@@ -12,12 +13,17 @@ import java.io.InputStreamReader;
 
 public class OrderProcess {
     Drink drink;
-    SizeFactory sizeFactory = new SizeFactory();
-    DrinkFactory drinkFactory = new DrinkFactory();
-    OptionFactory optionFactory = new OptionFactory();
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    SizeFactory sizeFactory;
+    DrinkFactory drinkFactory;
+    OptionFactory optionFactory;
+    SingletonBufferedReader br;
 
-    public OrderProcess() {}
+    public OrderProcess() {
+        sizeFactory = new SizeFactory();
+        drinkFactory = new DrinkFactory();
+        optionFactory = new OptionFactory();
+        br = SingletonBufferedReader.getInstance();
+    }
 
     public void start() throws InvalidInputException, IOException {
         /**

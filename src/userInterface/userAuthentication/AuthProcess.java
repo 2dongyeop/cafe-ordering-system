@@ -1,5 +1,6 @@
 package userInterface.userAuthentication;
 
+import userInterface.SingletonBufferedReader;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
 
@@ -18,11 +19,11 @@ enum AuthSelect {
 public class AuthProcess {
     private boolean logInSuccess = false;
     private static Set<User> userDB;
-    private BufferedReader br;
+    private SingletonBufferedReader br;
 
     public AuthProcess() {
         userDB = new HashSet<>();
-        br = new BufferedReader(new InputStreamReader(System.in));
+        br = SingletonBufferedReader.getInstance();
 
     }
 
