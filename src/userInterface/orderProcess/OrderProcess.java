@@ -17,7 +17,12 @@ public class OrderProcess {
     OptionFactory optionFactory = new OptionFactory();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public OrderProcess() throws InvalidInputException, IOException {
+    public OrderProcess() {}
+
+    public void start() throws InvalidInputException, IOException {
+        /**
+         * 템플릿 메소드
+         */
         selectDrink();
         selectCupSize();
         selectOptions();
@@ -27,7 +32,7 @@ public class OrderProcess {
         return drink;
     }
 
-    private final void selectDrink() throws IOException, InvalidInputException {
+    private void selectDrink() throws IOException, InvalidInputException {
         System.out.println("=====음료 주문이 시작됩니다.=====");
         System.out.println("1. 아메리카노 | 2. 카페라떼 | 3. 레몬차 | 4. 아인슈페너");
 
@@ -42,7 +47,7 @@ public class OrderProcess {
         }
     }
 
-    private final void selectCupSize() throws IOException, InvalidInputException {
+    private void selectCupSize() throws IOException, InvalidInputException {
         System.out.println("=====음료 사이즈를 선택하세요.=====");
         System.out.println("1. Small | 2. Medium | 3. Large");
 
@@ -55,7 +60,7 @@ public class OrderProcess {
         }
     }
 
-    private final void selectOptions() throws IOException, InvalidInputException {
+    private void selectOptions() throws IOException, InvalidInputException {
         boolean isEnded = false;
         //옵션은 여러 번을 추가할 수 있다.
         do {

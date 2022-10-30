@@ -20,10 +20,13 @@ public class AuthProcess {
     private static Set<User> userDB;
     private BufferedReader br;
 
-    public AuthProcess() throws IOException, InvalidInputException, SameIdException {
+    public AuthProcess() {
         userDB = new HashSet<>();
         br = new BufferedReader(new InputStreamReader(System.in));
 
+    }
+
+    public void start() throws IOException, InvalidInputException, SameIdException {
         System.out.println("=====어서오세요. 22세기 빽다방에 오신걸 환영합니다^^.=====");
         System.out.println("=====1. 회원으로 주문하기 | 2. 비회원으로 주문하기");
 
@@ -52,7 +55,7 @@ public class AuthProcess {
         return authSelect;
     }
 
-    private final void memberOrder() throws InvalidInputException, IOException, SameIdException {
+    private void memberOrder() throws InvalidInputException, IOException, SameIdException {
 
         do {
             System.out.println("=====회원 주문 페이지로 이동하기 전, 인증이 필요합니다.=====");
@@ -84,11 +87,11 @@ public class AuthProcess {
         return authSelect;
     }
 
-    private final void nonMemberOrder() {
+    private void nonMemberOrder() {
         System.out.println("비회원 주문을 선택하셨습니다.");
     }
 
-    private final void signUp() throws IOException, SameIdException {
+    private void signUp() throws IOException, SameIdException {
         System.out.println("=====회원가입 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");
@@ -105,12 +108,12 @@ public class AuthProcess {
         }
     }
 
-    private final boolean hasSameIdCheck(final String id) {
+    private boolean hasSameIdCheck(final String id) {
         /**
          * iterator 반복자를 이용한 id 중복 체크
-         */                                             //메소드에 final 다 붙일거면 클래스에다 붙여라
+         */
         Iterator<User> iterator = userDB.iterator();   //userDB를 HashMap으로 id를 키로 잡고,
-        while (iterator.hasNext()) {                    //BufferedReader를 싱글턴으로만들고, 입력값을 enum으로 바꾸는 과정을 만들어보기
+        while (iterator.hasNext()) {                    //BufferedReader를 싱글턴으로 만들고, 입력값을 enum으로 바꾸는 과정을 만들어보기
             User temp = iterator.next();
 
             if (id.equals(temp.getId()))
@@ -119,7 +122,7 @@ public class AuthProcess {
         return false;
     }
 
-    private final boolean logIn() throws IOException {
+    private boolean logIn() throws IOException {
         System.out.println("=====로그인 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");

@@ -33,16 +33,18 @@ public class MainUI {
     SizeFactory sizeFactory;
     DrinkFactory drinkFactory;
     OptionFactory optionFactory;
-    RecommendProcess recommnedProcess;
+    RecommendProcess recommendProcess;
     AuthProcess userAuthProcess;
     OrderProcess orderProcess;
     boolean isExited = false;
 
     public MainUI() {
-        orderList = new ArrayList<Drink>();
+        orderList = new ArrayList<>();
         sizeFactory = new SizeFactory();
         drinkFactory = new DrinkFactory();
         optionFactory = new OptionFactory();
+        orderProcess = new OrderProcess();
+        userAuthProcess = new AuthProcess();
         br = new BufferedReader(new InputStreamReader(System.in));
 
         try {
@@ -54,8 +56,9 @@ public class MainUI {
         }
     }
 
-    private final void welcomeUI() throws IOException, InvalidInputException, SameIdException {
-        userAuthProcess = new AuthProcess();
+    private void welcomeUI() throws IOException, InvalidInputException, SameIdException {
+        //음료를 주문하기 전, 먼저 회원/비회원 주문을 선택해야 한다.
+        userAuthProcess.start();
 
         do {
             System.out.println("=====카페 주문 시스템이 시작됩니다.=====");
@@ -63,10 +66,10 @@ public class MainUI {
 
             try {
                 switch (transformCafeOrder(br.readLine())) {
-                    case ORDERPROCESS -> {orderProcess(); printOrderDetails(orderList);}
+                    case ORDERPROCESS -> orderProcess();
                     case SHOWRECOMMENDEDMENU -> showRecommendedMenu();
                     case EXIT -> {
-                        System.out.println("프로그램을 종료합니다.");
+                        System.out.println("주문 시스템을 종료합니다.");
                         isExited = true;
                     }
                     default -> throw new InvalidInputException("선택지는 1부터 3까지만 가능합니다.");
@@ -75,6 +78,9 @@ public class MainUI {
                 System.out.println("입력은 정수만 가능합니다.");
             }
         } while (!isExited);
+
+        System.out.println("===== 최종 주문 내역 =====");
+        printOrderDetails(orderList);
     }
 
     private CafeSelect transformCafeOrder(final String s) throws InvalidInputException {
@@ -93,15 +99,12 @@ public class MainUI {
         return cafeSelect;
     }
 
-    private final void orderProcess() throws IOException, InvalidInputException {
-        /**
-         * 템플릿 메소드
-         */
-        orderProcess = new OrderProcess();
+    private void orderProcess() throws IOException, InvalidInputException {
+        orderProcess.start();
         askForAdditionalOrder();
     }
 
-    private final void askForAdditionalOrder() throws IOException {
+    private void askForAdditionalOrder() throws IOException {
         System.out.println("===== 다른 음료를 추가로 주문하시겠습니까? =====");
         System.out.println("추가 주문하기 : 1을 입력 | 주문 끝내기 : 2를 입력");
 
@@ -134,7 +137,7 @@ public class MainUI {
         return orderSelect;
     }
 
-    private final void printOrderDetails(List orderList) {
+    private void printOrderDetails(final List orderList) {
         Iterator<Drink> iterator = orderList.iterator();
 
         while (iterator.hasNext()) {
@@ -143,10 +146,10 @@ public class MainUI {
         }
     }
 
-    private final void showRecommendedMenu() throws InvalidInputException {
-        recommnedProcess = new RecommendProcess();
+    private void showRecommendedMenu() throws InvalidInputException {
+        recommendProcess = new RecommendProcess();
 
-        recommendDrink = recommnedProcess.getRecommendedDrink();
+        recommendDrink = recommendProcess.getRecommendedDrink();
 
         System.out.println("오늘의 추천 메뉴는 : " + recommendDrink.getDescription());
     }
