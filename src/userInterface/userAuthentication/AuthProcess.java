@@ -1,20 +1,13 @@
 package userInterface.userAuthentication;
 
+import enumeration.AuthSelect;
+import enumeration.OrderMethodSelect;
 import userInterface.SingletonBufferedReader;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
-
-enum AuthSelect {
-    MEMBERORDER,
-    NONMEMBERSELECT,
-    SIGNUP,
-    LOGIN;
-}
 
 public class AuthProcess {
     private boolean logInSuccess = false;
@@ -33,7 +26,7 @@ public class AuthProcess {
 
 
         try {
-            switch (transformAuthProcess(br.readLine())) {
+            switch (OrderMethodSelect.transform(br.readLine())) {
                 case MEMBERORDER -> memberOrder();
                 case NONMEMBERSELECT -> nonMemberOrder();
                 default -> throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
@@ -43,19 +36,6 @@ public class AuthProcess {
         }
     }
 
-    private AuthSelect transformAuthProcess(final String s) throws InvalidInputException {
-        AuthSelect authSelect = switch (s) {
-            case "1" -> {
-                yield  AuthSelect.MEMBERORDER;
-            }
-            case "2" -> {
-                yield AuthSelect.NONMEMBERSELECT;
-            }
-            default -> throw new InvalidInputException("1또는 2만 입력 가능합니다.");
-        };
-        return authSelect;
-    }
-
     private void memberOrder() throws InvalidInputException, IOException, SameIdException {
 
         do {
@@ -63,7 +43,7 @@ public class AuthProcess {
             System.out.println("1. 회원가입 | 2. 로그인");
 
             try {
-                switch (transformAuthMethod(br.readLine())) {
+                switch (AuthSelect.transform(br.readLine())) {
                     case SIGNUP -> signUp();
                     case LOGIN -> logInSuccess = logIn();
                     default -> throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
@@ -72,20 +52,6 @@ public class AuthProcess {
                 System.out.println("입력은 정수만 가능합니다.");
             }
         } while (!logInSuccess);
-    }
-
-
-    private AuthSelect transformAuthMethod(final String s) throws InvalidInputException {
-        AuthSelect authSelect = switch (s) {
-            case "1" -> {
-                yield  AuthSelect.SIGNUP;
-            }
-            case "2" -> {
-                yield AuthSelect.LOGIN;
-            }
-            default -> throw new InvalidInputException("1또는 2만 입력 가능합니다.");
-        };
-        return authSelect;
     }
 
     private void nonMemberOrder() {
@@ -113,8 +79,8 @@ public class AuthProcess {
         /**
          * iterator 반복자를 이용한 id 중복 체크
          */
-        Iterator<User> iterator = userDB.iterator();   //userDB를 HashMap으로 id를 키로 잡고,
-        while (iterator.hasNext()) {                    //BufferedReader를 싱글턴으로 만들고, 입력값을 enum으로 바꾸는 과정을 만들어보기
+        Iterator<User> iterator = userDB.iterator();
+        while (iterator.hasNext()) {
             User temp = iterator.next();
 
             if (id.equals(temp.getId()))
