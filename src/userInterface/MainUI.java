@@ -4,6 +4,8 @@ import drinkFactory.DrinkFactory;
 import drinkFactory.OptionFactory;
 import drinkFactory.SizeFactory;
 import drinkList.Drink;
+import enumeration.LastOrderSelect;
+import enumeration.MenuSelect;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
 import userInterface.orderProcess.OrderProcess;
@@ -14,14 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-
-enum CafeSelect {
-    ORDERPROCESS,
-    SHOWRECOMMENDEDMENU,
-    EXIT,
-    ADDITIONALORDER;
-}
 
 public class MainUI {
     Drink drink;
@@ -63,7 +57,7 @@ public class MainUI {
             System.out.println("1. 음료 주문 | 2. 이달의 추천 메뉴 보기 | 3. 종료");
 
             try {
-                switch (transformCafeOrder(br.readLine())) {
+                switch (MenuSelect.transform(br.readLine())) {
                     case ORDERPROCESS -> orderProcess();
                     case SHOWRECOMMENDEDMENU -> showRecommendedMenu();
                     case EXIT -> {
@@ -81,22 +75,6 @@ public class MainUI {
         printOrderDetails(orderList);
     }
 
-    private CafeSelect transformCafeOrder(final String s) throws InvalidInputException {
-        CafeSelect cafeSelect = switch (s) {
-            case "1" -> {
-                yield  CafeSelect.ORDERPROCESS;
-            }
-            case "2" -> {
-                yield CafeSelect.SHOWRECOMMENDEDMENU;
-            }
-            case "3" -> {
-                yield CafeSelect.EXIT;
-            }
-            default -> throw new InvalidInputException("1부터 3까지만 입력 가능합니다.");
-        };
-        return cafeSelect;
-    }
-
     private void orderProcess() throws IOException, InvalidInputException {
         orderProcess.start();
         askForAdditionalOrder();
@@ -107,7 +85,7 @@ public class MainUI {
         System.out.println("추가 주문하기 : 1을 입력 | 주문 끝내기 : 2를 입력");
 
         try {
-            switch (transformAdditionalOrder(br.readLine())) {
+            switch (LastOrderSelect.transform(br.readLine())) {
                 case ADDITIONALORDER -> {
                     drink = orderProcess.getDrink();
                     orderList.add(drink);}
@@ -120,19 +98,6 @@ public class MainUI {
         } catch (ClassCastException | InvalidInputException e) {
             System.out.println("입력은 1과 2만 가능합니다.");
         }
-    }
-
-    private CafeSelect transformAdditionalOrder(final String s) throws InvalidInputException {
-        CafeSelect orderSelect = switch (s) {
-            case "1" -> {
-                yield  CafeSelect.ADDITIONALORDER;
-            }
-            case "2" -> {
-                yield CafeSelect.EXIT;
-            }
-            default -> throw new InvalidInputException("1부터 2까지만 입력 가능합니다.");
-        };
-        return orderSelect;
     }
 
     private void printOrderDetails(final List orderList) {
@@ -148,7 +113,6 @@ public class MainUI {
         recommendProcess = new RecommendProcess();
 
         recommendDrink = recommendProcess.getRecommendedDrink();
-
         System.out.println("오늘의 추천 메뉴는 : " + recommendDrink.getDescription());
     }
 }
