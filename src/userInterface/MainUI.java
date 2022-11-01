@@ -57,7 +57,8 @@ public class MainUI {
             try {
                 switch (MenuSelect.transform(br.readLine())) {
                     case ORDER_PROCESS -> {
-                        orderProcess();
+                        orderProcess.start();
+                        orderList = orderProcess.getOrderList();
                         isExited = true;
                     }
                     case SHOW_RECOMMENDED_MENU -> showRecommendedMenu();
@@ -74,11 +75,6 @@ public class MainUI {
 
         System.out.println("===== 최종 주문 내역 =====");
         printOrderDetails(orderList);
-    }
-
-    private void orderProcess() throws IOException, InvalidInputException {
-        orderProcess.start();
-        orderList = orderProcess.getOrderList();
     }
 
     private void printOrderDetails(final List orderList) {
