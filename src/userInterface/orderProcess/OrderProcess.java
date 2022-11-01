@@ -102,7 +102,7 @@ public class OrderProcess {
 
         try {
             switch (LastOrderSelect.transform(br.readLine())) {
-                case ADDITIONALORDER -> {
+                case ADDITIONAL_ORDER -> {
                     drink = getDrink();
                     orderList.add(drink);
                 }

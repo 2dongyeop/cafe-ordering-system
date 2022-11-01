@@ -3,17 +3,17 @@ package enumeration;
 import userInterface.applicationException.InvalidInputException;
 
 public enum MenuSelect {
-    ORDERPROCESS,
-    SHOWRECOMMENDEDMENU,
+    ORDER_PROCESS,
+    SHOW_RECOMMENDED_MENU,
     EXIT;
 
     public static MenuSelect transform(final String s) throws InvalidInputException {
         MenuSelect menuSelect = switch (s) {
             case "1" -> {
-                yield  ORDERPROCESS;
+                yield  ORDER_PROCESS;
             }
             case "2" -> {
-                yield SHOWRECOMMENDEDMENU;
+                yield SHOW_RECOMMENDED_MENU;
             }
             case "3" -> {
                 yield EXIT;

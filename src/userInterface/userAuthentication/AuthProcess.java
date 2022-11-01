@@ -27,8 +27,8 @@ public class AuthProcess {
 
         try {
             switch (OrderMethodSelect.transform(br.readLine())) {
-                case MEMBERORDER -> memberOrder();
-                case NONMEMBERSELECT -> nonMemberOrder();
+                case MEMBER_ORDER -> memberOrder();
+                case NONMEMBER_SELECT -> nonMemberOrder();
                 default -> throw new InvalidInputException("선택지는 1 또는 2만 가능합니다.");
             }
         } catch (ClassCastException e) {

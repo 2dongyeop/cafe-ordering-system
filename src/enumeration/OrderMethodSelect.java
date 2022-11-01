@@ -3,16 +3,16 @@ package enumeration;
 import userInterface.applicationException.InvalidInputException;
 
 public enum OrderMethodSelect {
-    MEMBERORDER,
-    NONMEMBERSELECT;
+    MEMBER_ORDER,
+    NONMEMBER_SELECT;
 
     public static OrderMethodSelect transform(final String s) throws InvalidInputException {
         OrderMethodSelect authSelect = switch (s) {
             case "1" -> {
-                yield  MEMBERORDER;
+                yield  MEMBER_ORDER;
             }
             case "2" -> {
-                yield NONMEMBERSELECT;
+                yield NONMEMBER_SELECT;
             }
             default -> throw new InvalidInputException("1또는 2만 입력 가능합니다.");
         };

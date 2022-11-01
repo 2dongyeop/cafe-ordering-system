@@ -56,11 +56,11 @@ public class MainUI {
 
             try {
                 switch (MenuSelect.transform(br.readLine())) {
-                    case ORDERPROCESS -> {
+                    case ORDER_PROCESS -> {
                         orderProcess();
                         isExited = true;
                     }
-                    case SHOWRECOMMENDEDMENU -> showRecommendedMenu();
+                    case SHOW_RECOMMENDED_MENU -> showRecommendedMenu();
                     case EXIT -> {
                         System.out.println("주문 시스템을 종료합니다.");
                         isExited = true;

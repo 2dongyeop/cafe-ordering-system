@@ -4,12 +4,12 @@ import userInterface.applicationException.InvalidInputException;
 
 public enum LastOrderSelect {
     EXIT,
-    ADDITIONALORDER;
+    ADDITIONAL_ORDER;
 
     public static LastOrderSelect transform(final String s) throws InvalidInputException {
         LastOrderSelect orderSelect = switch (s) {
             case "1" -> {
-                yield ADDITIONALORDER;
+                yield ADDITIONAL_ORDER;
             }
             case "2" -> {
                 yield EXIT;
