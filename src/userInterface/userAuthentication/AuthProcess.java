@@ -58,7 +58,7 @@ public class AuthProcess {
         System.out.println("비회원 주문을 선택하셨습니다.");
     }
 
-    private void signUp() throws IOException, SameIdException {
+    private void signUp() throws IOException, SameIdException, InvalidInputException {
         System.out.println("=====회원가입 페이지입니다.=====");
 
         System.out.print("id를 입력하세요 > ");
@@ -66,6 +66,10 @@ public class AuthProcess {
 
         System.out.print("password를 입력하세요 > ");
         String signUpPassword = br.readLine();
+
+        if (signUpId.equals("") || signUpPassword.equals("")) {
+            throw new InvalidInputException("공백은 입력할 수 없습니다.");
+        }
 
         if (!hasSameIdCheck(signUpId)) {
             userDB.add(new User(signUpId, signUpPassword));

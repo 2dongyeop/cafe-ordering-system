@@ -56,7 +56,10 @@ public class MainUI {
 
             try {
                 switch (MenuSelect.transform(br.readLine())) {
-                    case ORDERPROCESS -> orderProcess();
+                    case ORDERPROCESS -> {
+                        orderProcess();
+                        isExited = true;
+                    }
                     case SHOWRECOMMENDEDMENU -> showRecommendedMenu();
                     case EXIT -> {
                         System.out.println("주문 시스템을 종료합니다.");
