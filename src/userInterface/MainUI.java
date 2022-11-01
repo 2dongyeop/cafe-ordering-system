@@ -4,7 +4,6 @@ import drinkFactory.DrinkFactory;
 import drinkFactory.OptionFactory;
 import drinkFactory.SizeFactory;
 import drinkList.Drink;
-import enumeration.LastOrderSelect;
 import enumeration.MenuSelect;
 import userInterface.applicationException.InvalidInputException;
 import userInterface.applicationException.SameIdException;
@@ -18,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MainUI {
-    Drink drink;
     SingletonBufferedReader br;
     Drink recommendDrink;
     List<Drink> orderList;
@@ -77,27 +75,7 @@ public class MainUI {
 
     private void orderProcess() throws IOException, InvalidInputException {
         orderProcess.start();
-        askForAdditionalOrder();
-    }
-
-    private void askForAdditionalOrder() throws IOException {
-        System.out.println("===== 다른 음료를 추가로 주문하시겠습니까? =====");
-        System.out.println("추가 주문하기 : 1을 입력 | 주문 끝내기 : 2를 입력");
-
-        try {
-            switch (LastOrderSelect.transform(br.readLine())) {
-                case ADDITIONALORDER -> {
-                    drink = orderProcess.getDrink();
-                    orderList.add(drink);}
-                case EXIT -> {
-                    drink = orderProcess.getDrink();
-                    orderList.add(drink);
-                    isExited = true;}
-                default -> throw new InvalidInputException();
-            }
-        } catch (ClassCastException | InvalidInputException e) {
-            System.out.println("입력은 1과 2만 가능합니다.");
-        }
+        orderList = orderProcess.getOrderList();
     }
 
     private void printOrderDetails(final List orderList) {

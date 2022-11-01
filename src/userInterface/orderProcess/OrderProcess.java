@@ -4,21 +4,25 @@ import drinkFactory.DrinkFactory;
 import drinkFactory.OptionFactory;
 import drinkFactory.SizeFactory;
 import drinkList.Drink;
+import enumeration.LastOrderSelect;
 import userInterface.SingletonBufferedReader;
 import userInterface.applicationException.InvalidInputException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderProcess {
     Drink drink;
+    List<Drink> orderList;
     SizeFactory sizeFactory;
     DrinkFactory drinkFactory;
     OptionFactory optionFactory;
     SingletonBufferedReader br;
+    boolean isExited = false;
 
     public OrderProcess() {
+        orderList = new ArrayList<>();
         sizeFactory = new SizeFactory();
         drinkFactory = new DrinkFactory();
         optionFactory = new OptionFactory();
@@ -29,14 +33,19 @@ public class OrderProcess {
         /**
          * 템플릿 메소드
          */
-        selectDrink();
-        selectCupSize();
-        selectOptions();
+        do {
+            selectDrink();
+            selectCupSize();
+            selectOptions();
+            askForAdditionalOrder();
+        } while (!isExited);
     }
 
     public Drink getDrink() {
         return drink;
     }
+
+    public List getOrderList() { return orderList; }
 
     private void selectDrink() throws IOException, InvalidInputException {
         System.out.println("=====음료 주문이 시작됩니다.=====");
@@ -85,5 +94,27 @@ public class OrderProcess {
                 System.out.println("입력은 정수만 가능합니다.");
             }
         } while (!isEnded);
+    }
+
+    private void askForAdditionalOrder() throws IOException {
+        System.out.println("===== 다른 음료를 추가로 주문하시겠습니까? =====");
+        System.out.println("추가 주문하기 : 1을 입력 | 주문 끝내기 : 2를 입력");
+
+        try {
+            switch (LastOrderSelect.transform(br.readLine())) {
+                case ADDITIONALORDER -> {
+                    drink = getDrink();
+                    orderList.add(drink);
+                }
+                case EXIT -> {
+                    drink = getDrink();
+                    orderList.add(drink);
+                    isExited = true;
+                }
+                default -> throw new InvalidInputException();
+            }
+        } catch (ClassCastException | InvalidInputException e) {
+            System.out.println("입력은 1과 2만 가능합니다.");
+        }
     }
 }
