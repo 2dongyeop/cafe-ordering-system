@@ -26,7 +26,7 @@ public class OrderUI {
         System.out.println("1. Ice | 2. Shot | 3. Syrup | 4. [Do Not add Option]");
     }
 
-    public void askForAdditionalOrderUI() {
+    public void askForLastOrderUI() {
         System.out.println("===== 다른 음료를 추가로 주문하시겠습니까? =====");
         System.out.println("추가 주문하기 : 1을 입력 | 주문 끝내기 : 2를 입력");
     }

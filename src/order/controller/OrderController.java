@@ -28,7 +28,7 @@ public class OrderController {
             createDrink();
             selectDrinkSize();
             selectOptions();
-            askForAdditionalOrder();
+            askForLastOrder();
         } while (!isExited);
 
         orderService.orderDetail();
@@ -80,8 +80,8 @@ public class OrderController {
         } while (!isLastOption);
     }
 
-    public void askForAdditionalOrder() {
-        orderUI.askForAdditionalOrderUI();
+    public void askForLastOrder() {
+        orderUI.askForLastOrderUI();
 
         try {
             switch (LastOrderSelect.transform(br.readLine())) {
