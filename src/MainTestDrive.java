@@ -1,13 +1,22 @@
-import userInterface.MainUI;
-import userInterface.applicationException.InvalidInputException;
-import userInterface.applicationException.SameIdException;
-
-import java.io.IOException;
+import auth.controller.AuthController;
+import order.controller.OrderController;
 
 public class MainTestDrive {
-    private static MainUI UI;
+    private AuthController authController;
+    private OrderController orderController;
 
-    public static void main(String[] args) throws InvalidInputException, IOException, SameIdException {
-        UI = new MainUI();
+    public MainTestDrive() {
+        authController = new AuthController();
+        orderController = new OrderController();
+    }
+
+    public static void main(String[] args){
+        MainTestDrive testDrive = new MainTestDrive();
+        testDrive.start();
+    }
+
+    private void start(){
+        authController.start();
+        orderController.start();
     }
 }

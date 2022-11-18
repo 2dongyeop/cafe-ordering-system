@@ -92,7 +92,7 @@
 
 #### 💡 22/10/09
 - `NoCommand` 클래스를 만들어 `Null Object 패턴`을 적용하여, 안정성을 높였습니다.
-- 코드를 객체지향에 맞게 수정하기 위해 [메뉴 선택 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/userInterface/orderProcess/OrderProcess.java)을 MainUI로부터 분리하였습니다.
+- 코드를 객체지향에 맞게 수정하기 위해 [메뉴 선택 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/ui/orderProcess/OrderProcess.java)을 MainUI로부터 분리하였습니다.
   - 선택이 이루어질 경우마다 **데코레이터 및 팩토리**를 이용해 음료를 구현하였습니다.
 - 여러 음료들의 주문 결과를 출력할 때 **반복자 패턴**을 이용합니다.
 
@@ -101,6 +101,6 @@
 #### 💡 22/10/08
 - 카페 주문 시스템의 기본 로직을 설계합니다.
   - **템플릿 메소드 패턴**을 이용하여 메뉴 선택 과정을 일련의 메소드로 묶었습니다.
-- 메뉴를 주문하기 전, [인증 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/userInterface/userAuthentication/AuthProcess.java)을 추가하였습니다.
+- 메뉴를 주문하기 전, [인증 과정](https://github.com/2dongyeop/cafe-ordering-system/blob/main/src/ui/userAuthentication/AuthProcess.java)을 추가하였습니다.
   - 현재 로그인을 이용한 회원 주문과 비회원 주문을 구현하였습니다.
-  - 로그인 과정 중 발생하는 예외는 [사용자 예외](https://github.com/2dongyeop/cafe-ordering-system/tree/main/src/userInterface/applicationException)를 만들어 사용합니다.
+  - 로그인 과정 중 발생하는 예외는 [사용자 예외](https://github.com/2dongyeop/cafe-ordering-system/tree/main/src/ui/implementation.applicationException)를 만들어 사용합니다.
