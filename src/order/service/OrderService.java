@@ -15,9 +15,9 @@ public class OrderService {
     private OrderUI orderUI;
     private OrderRepository orderRepository;
 
-    public OrderService() {
+    public OrderService(OrderRepository orderRepository) {
         orderUI = new OrderUI();
-        orderRepository = new OrderRepository();
+        this.orderRepository = orderRepository;
     }
 
     public void createDrink(final int type) throws InvalidInputException {

@@ -14,9 +14,9 @@ public class OrderController {
     private SingletonBufferedReader br;
     private boolean isExited = false;
 
-    public OrderController() {
+    public OrderController(OrderService orderService) {
         orderUI = new OrderUI();
-        orderService = new OrderService();
+        this.orderService = orderService;
         br = SingletonBufferedReader.getInstance();
     }
 

@@ -14,9 +14,9 @@ public class AuthService {
     AuthUI authUI;
     UserRepository userRepository;
 
-    public AuthService() {
+    public AuthService(UserRepository userRepository) {
         authUI = new AuthUI();
-        userRepository = new UserRepository();
+        this.userRepository = userRepository;
     }
 
     public void signUp(SignUpDto signUpDto) throws SameIdException {

@@ -17,9 +17,9 @@ public class AuthController {
     AuthUI authUI;
     AuthService authService;
 
-    public AuthController() { /* 의존성 주입 : DI */
+    public AuthController(AuthService authService) {
         authUI = new AuthUI();
-        authService = new AuthService();
+        this.authService = authService;
 
         br = SingletonBufferedReader.getInstance();
     }
