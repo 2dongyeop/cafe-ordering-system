@@ -17,9 +17,6 @@
 <br/>
 
 ### 트랜잭션 과정 및 클래스 다이어그램
-<details>
-<summary> 이미지 보기 </summary>
-<div markdown="1">       
 
 - 트랜잭션 과정
 
@@ -32,10 +29,6 @@
 - 클래스 다이어그램
 
   <img src="https://github.com/2dongyeop/cafe-ordering-system/blob/main/image/class-diagram.png" width = 800/>
-
-
-</div>
-</details>
 
 
 
