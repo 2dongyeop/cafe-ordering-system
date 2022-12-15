@@ -1,8 +1,8 @@
 package auth.repository;
 
 public class UserEntity {
-    private String id;
-    private String password;
+    private final String id;
+    private final String password;
 
     public UserEntity(String id, String password) {
         this.id = id;

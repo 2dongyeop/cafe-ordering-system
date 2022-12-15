@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class UserRepository {
-    private Set<UserEntity> userDB;
+    private final Set<UserEntity> userDB;
 
     public UserRepository() {
         userDB  = new HashSet<>();

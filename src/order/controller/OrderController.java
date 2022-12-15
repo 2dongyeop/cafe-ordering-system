@@ -9,9 +9,9 @@ import order.service.OrderService;
 import java.io.IOException;
 
 public class OrderController {
-    private OrderUI orderUI;
-    private OrderService orderService;
-    private SingletonBufferedReader br;
+    private final OrderUI orderUI;
+    private final OrderService orderService;
+    private final SingletonBufferedReader br;
     private boolean isExited = false;
 
     public OrderController(OrderService orderService) {
@@ -23,13 +23,12 @@ public class OrderController {
     public void start() {
         orderUI.welcome();
 
-        do {
-
+        while (!isExited) {
             createDrink();
             selectDrinkSize();
             selectOptions();
             askForLastOrder();
-        } while (!isExited);
+        }
 
         orderService.orderDetail();
     }
@@ -38,9 +37,7 @@ public class OrderController {
         orderUI.createDrinkUI();
 
         try {
-            int drinkSelect = Integer.parseInt(br.readLine());
-
-            orderService.createDrink(drinkSelect);
+            orderService.createDrink(br.readLine());
         } catch (ClassCastException | InvalidInputException e) {
             orderUI.invalidInput();
         } catch (IOException e) {}
@@ -50,34 +47,27 @@ public class OrderController {
         orderUI.selectDrinkSizeUI();
 
         try {
-            int sizeSelect = Integer.parseInt(br.readLine());
-
-            orderService.selectDrinkSize(sizeSelect);
+            orderService.selectDrinkSize(br.readLine());
         } catch (ClassCastException | InvalidInputException e) {
             orderUI.invalidInput();
         } catch (IOException e) {}
     }
 
     private void selectOptions() {
-
         boolean isLastOption = false;
-        do {
+
+        while (!isLastOption) {
             orderUI.selectOptionsUI();
 
             try {
-                int sizeSelect = Integer.parseInt(br.readLine());
+                String sizeSelect = br.readLine();
+                orderService.selectOption(sizeSelect);
 
-                if (sizeSelect > 0 && sizeSelect < 5) {
-
-                    orderService.selectOption(sizeSelect);
-
-                    if (sizeSelect == 4) isLastOption = true;
-                } else
-                    throw new InvalidInputException();
+                isLastOption = (sizeSelect.equals("4"));
             } catch (ClassCastException | InvalidInputException | NumberFormatException e) {
                 orderUI.invalidInput();
             } catch (IOException e) {}
-        } while (!isLastOption);
+        }
     }
 
     public void askForLastOrder() {

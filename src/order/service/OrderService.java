@@ -12,23 +12,23 @@ import java.util.List;
 
 public class OrderService {
     private Drink drink;
-    private OrderUI orderUI;
-    private OrderRepository orderRepository;
+    private final OrderUI orderUI;
+    private final OrderRepository orderRepository;
 
     public OrderService(OrderRepository orderRepository) {
         orderUI = new OrderUI();
         this.orderRepository = orderRepository;
     }
 
-    public void createDrink(final int type) throws InvalidInputException {
+    public void createDrink(final String type) throws InvalidInputException {
         drink = DrinkFactory.createDrink(type);
     }
 
-    public void selectDrinkSize(final int sizeSelect) throws InvalidInputException {
+    public void selectDrinkSize(final String sizeSelect) throws InvalidInputException {
         drink = SizeFactory.selectSize(sizeSelect, drink);
     }
 
-    public void selectOption(final int sizeSelect) throws InvalidInputException {
+    public void selectOption(final String sizeSelect) throws InvalidInputException {
         drink = OptionFactory.selectOption(sizeSelect, drink);
     }
 

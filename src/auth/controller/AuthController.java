@@ -12,10 +12,10 @@ import implementation.singleton.SingletonBufferedReader;
 import java.io.IOException;
 
 public class AuthController {
-    private SingletonBufferedReader br;
+    private final SingletonBufferedReader br;
     private boolean logInSuccess = false;
-    AuthUI authUI;
-    AuthService authService;
+    private final AuthUI authUI;
+    private final AuthService authService;
 
     public AuthController(AuthService authService) {
         authUI = new AuthUI();
@@ -34,7 +34,7 @@ public class AuthController {
 
     private void signUpOrSignIn() throws IOException {
 
-        do {
+        while (!logInSuccess) {
             authUI.signUpOrSignInUI();
 
             try {
@@ -45,7 +45,7 @@ public class AuthController {
             } catch (InvalidInputException e) {
                 authUI.invalidInput();
             }
-        } while (!logInSuccess);
+        }
     }
 
     private void signUp() throws IOException {
@@ -61,10 +61,7 @@ public class AuthController {
             if (signUpId.equals("") || signUpPassword.equals("")) {
                 throw new InvalidInputException();
             }
-
-            SignUpDto signUpDto = new SignUpDto(signUpId, signUpPassword);
-
-            authService.signUp(signUpDto);
+            authService.signUp(new SignUpDto(signUpId, signUpPassword));
 
         } catch (InvalidInputException e) {
             authUI.invalidInput();
@@ -82,8 +79,6 @@ public class AuthController {
         authUI.inputPasswd();
         String logInPassword = br.readLine();
 
-        LogInDto logInDto = new LogInDto(logInId, logInPassword);
-
-        return authService.logIn(logInDto);
+        return authService.logIn(new LogInDto(logInId, logInPassword));
     }
 }

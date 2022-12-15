@@ -7,15 +7,15 @@ import order.repository.sizeEntity.CupS;
 import implementation.applicationException.InvalidInputException;
 
 public class SizeFactory {
-    public static Drink selectSize(int type, Drink drink) throws InvalidInputException {
+    public static Drink selectSize(final String type, Drink drink) throws InvalidInputException {
         drink = switch (type) {
-            case 1 -> {
+            case "1" -> {
                 yield new CupS(drink);
             }
-            case 2 -> {
+            case "2" -> {
                 yield new CupM(drink);
             }
-            case 3 -> {
+            case "3" -> {
                 yield new CupL(drink);
             }
             default -> throw new InvalidInputException("1부터 3까지만 입력 가능합니다.");

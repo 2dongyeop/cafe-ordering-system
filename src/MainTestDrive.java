@@ -2,11 +2,12 @@ import auth.controller.AuthController;
 import order.controller.OrderController;
 
 public class MainTestDrive {
-    private AppConfig appConfig = new AppConfig();
-    private AuthController authController;
-    private OrderController orderController;
+    private final AppConfig appConfig;
+    private final AuthController authController;
+    private final OrderController orderController;
 
     public MainTestDrive() {
+        appConfig = new AppConfig();
         authController = appConfig.authController();
         orderController = appConfig.orderController();
     }

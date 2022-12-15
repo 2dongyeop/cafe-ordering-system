@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AuthService {
-    AuthUI authUI;
-    UserRepository userRepository;
+    private final AuthUI authUI;
+    private final UserRepository userRepository;
 
     public AuthService(UserRepository userRepository) {
         authUI = new AuthUI();
@@ -25,12 +25,11 @@ public class AuthService {
         String signUpId = signUpDto.getId();
         String signUpPassword = signUpDto.getPassword();
 
-        if (!hasSameIdCheck(signUpId, userList)) {
-            userRepository.add(new UserEntity(signUpId, signUpPassword));
-            authUI.successSignUp();
-        } else {
+        if (hasSameIdCheck(signUpId, userList))
             throw new SameIdException();
-        }
+
+        userRepository.add(new UserEntity(signUpId, signUpPassword));
+        authUI.successSignUp();
     }
 
     private boolean hasSameIdCheck(final String id, final List<UserEntity> userList) {
@@ -47,7 +46,7 @@ public class AuthService {
         return false;
     }
 
-    public boolean logIn(LogInDto logInDto) {
+    public boolean logIn(final LogInDto logInDto) {
         String logInId = logInDto.getId();
         String logInPassword = logInDto.getPassword();
 
