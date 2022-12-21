@@ -79,6 +79,6 @@ public class AuthController {
         authUI.inputPasswd();
         String logInPassword = br.readLine();
 
-        return authService.logIn(new LogInDto(logInId, logInPassword));
+        return authService.signIn(new LogInDto(logInId, logInPassword));
     }
 }

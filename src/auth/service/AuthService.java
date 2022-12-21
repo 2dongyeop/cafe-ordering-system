@@ -1,7 +1,6 @@
 package auth.service;
 
-import auth.controller.dto.LogInDto;
-import auth.controller.dto.SignUpDto;
+import auth.controller.dto.AuthDto;
 import auth.front.AuthUI;
 import auth.repository.UserEntity;
 import auth.repository.UserRepository;
@@ -19,11 +18,11 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public void signUp(SignUpDto signUpDto) throws SameIdException {
+    public void signUp(final AuthDto authDto) throws SameIdException {
         List<UserEntity> userList = userRepository.getUserDB();
 
-        String signUpId = signUpDto.getId();
-        String signUpPassword = signUpDto.getPassword();
+        String signUpId = authDto.getId();
+        String signUpPassword = authDto.getPassword();
 
         if (hasSameIdCheck(signUpId, userList))
             throw new SameIdException();
@@ -32,7 +31,7 @@ public class AuthService {
         authUI.successSignUp();
     }
 
-    private boolean hasSameIdCheck(final String id, final List<UserEntity> userList) {
+    private static boolean hasSameIdCheck(final String id, final List<UserEntity> userList) {
         /**
          * iterator 반복자를 이용한 id 중복 체크
          */
@@ -46,9 +45,9 @@ public class AuthService {
         return false;
     }
 
-    public boolean logIn(final LogInDto logInDto) {
-        String logInId = logInDto.getId();
-        String logInPassword = logInDto.getPassword();
+    public boolean signIn(final AuthDto authDto) {
+        String logInId = authDto.getId();
+        String logInPassword = authDto.getPassword();
 
         Iterator<UserEntity> iterator = userRepository.getUserDB().iterator();
         while (iterator.hasNext()) {
@@ -65,3 +64,4 @@ public class AuthService {
         return false;
     }
 }
+

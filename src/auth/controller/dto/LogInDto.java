@@ -1,12 +1,11 @@
 package auth.controller.dto;
 
-public class LogInDto {
+public class LogInDto extends AuthDto{
     private String id;
     private String password;
 
     public LogInDto(String id, String password) {
-        this.id = id;
-        this.password = password;
+        super(id, password);
     }
 
     public String getId() {
