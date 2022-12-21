@@ -34,15 +34,15 @@ public class AuthService {
 
     private static boolean filterPredicate(
             /**
-             * duplicate data에는 id와 password가 들어올 수 있다.
+             * duplicated data에는 id와 password가 들어올 수 있다.
              * 회원가입에서는 id를 data로 넣어 중복 체크에 쓰이고,
              * 로그인 시에는 id와 password를 각각 넣어 일치하는 정보가 있는지 확인하는 용도이다.
              * */
-            final String id, final List<UserEntity> userList, AuthPredicate p
+            final String duplicatedData, final List<UserEntity> userList, AuthPredicate p
     ) {
         for (UserEntity user : userList) {
 
-            if (p.test(id, user))
+            if (p.test(duplicatedData, user))
                 return true;
         }
         return false;
