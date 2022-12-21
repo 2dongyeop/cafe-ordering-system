@@ -6,6 +6,8 @@ public class LogInDto extends AuthDto{
 
     public LogInDto(String id, String password) {
         super(id, password);
+        this.id = id;
+        this.password = password;
     }
 
     public String getId() {

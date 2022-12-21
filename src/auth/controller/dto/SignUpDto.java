@@ -6,6 +6,8 @@ public class SignUpDto extends AuthDto{
 
     public SignUpDto(String id, String password) {
         super(id, password);
+        this.id = id;
+        this. password = password;
     }
 
     public String getId() {
