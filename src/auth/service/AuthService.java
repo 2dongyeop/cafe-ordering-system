@@ -4,6 +4,7 @@ import auth.controller.dto.AuthDto;
 import auth.front.AuthUI;
 import auth.repository.UserEntity;
 import auth.repository.UserRepository;
+import auth.service.predicate.AuthPredicate;
 import implementation.applicationException.SameIdException;
 
 import java.util.Iterator;
@@ -24,44 +25,60 @@ public class AuthService {
         String signUpId = authDto.getId();
         String signUpPassword = authDto.getPassword();
 
-        if (hasSameIdCheck(signUpId, userList))
+        if (filterPredicate(signUpId, userList, new FilterSameIdPredicate()))
             throw new SameIdException();
 
         userRepository.add(new UserEntity(signUpId, signUpPassword));
         authUI.successSignUp();
     }
 
-    private static boolean hasSameIdCheck(final String id, final List<UserEntity> userList) {
-        /**
-         * iterator 반복자를 이용한 id 중복 체크
-         */
-        Iterator<UserEntity> iterator = userList.iterator();
-        while (iterator.hasNext()) {
-            UserEntity temp = iterator.next();
+    private static boolean filterPredicate(
+            /**
+             * duplicate data에는 id와 password가 들어올 수 있다.
+             * 회원가입에서는 id를 data로 넣어 중복 체크에 쓰이고,
+             * 로그인 시에는 id와 password를 각각 넣어 일치하는 정보가 있는지 확인하는 용도이다.
+             * */
+            final String id, final List<UserEntity> userList, AuthPredicate p
+    ) {
+        for (UserEntity user : userList) {
 
-            if (id.equals(temp.getId()))
+            if (p.test(id, user))
                 return true;
         }
         return false;
     }
 
     public boolean signIn(final AuthDto authDto) {
+        List<UserEntity> userList = userRepository.getUserDB();
+
         String logInId = authDto.getId();
         String logInPassword = authDto.getPassword();
 
-        Iterator<UserEntity> iterator = userRepository.getUserDB().iterator();
-        while (iterator.hasNext()) {
-            UserEntity temp = iterator.next();
+        if (filterPredicate(logInId, userList, new FilterSameIdPredicate()) &&
+                filterPredicate(logInPassword, userList, new FilterSamePasswordPredicate())) {
 
-            if (logInId.equals(temp.getId()) && logInPassword.equals(temp.getPassword())) {
-                authUI.successSignIn();
-
-                return true;
-            }
+            authUI.successSignIn();
+            return true;
         }
 
         authUI.failSignIn();
         return false;
+    }
+
+    static class FilterSameIdPredicate implements AuthPredicate {
+
+        @Override
+        public boolean test(String id, UserEntity user) {
+            return id.equals(user.getId());
+        }
+    }
+
+    static class FilterSamePasswordPredicate implements AuthPredicate {
+
+        @Override
+        public boolean test(String password, UserEntity user) {
+            return password.equals(user.getPassword());
+        }
     }
 }
 
