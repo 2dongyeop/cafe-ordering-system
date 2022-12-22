@@ -42,6 +42,7 @@
   - Predicate를 활용하여 아래 동작들을 파라미터화
     - 회원가입시 기존 회원 정보와 중복이 있는지 검사하는 과정
     - 로그인시 일치하는 정보가 있는지 검사하는 과정
+- 이 내용을 [정리한 블로그 링크](https://velog.io/@dongvelop/Java-%EB%8F%99%EC%9E%91-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0%ED%99%94-%EC%A0%81%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0)를 첨부합니다.
 
 <br/>
 
